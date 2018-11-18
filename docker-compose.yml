@@ -8,7 +8,7 @@ web:
     - redis:redis
   env_file: env
   volumes:
-    - ./web:/data/web
+    - D:\Quellecode\DOCKER\PING\web:/data/web
   command: /usr/bin/gunicorn mydjango.wsgi:application -w 2 -b :8000
 
 nginx:
@@ -17,7 +17,7 @@ nginx:
   ports:
     - "80:80"
   volumes_from:
-    - web
+    - D:\Quellecode\DOCKER\PING\web
   links:
     - web:web
 
@@ -27,8 +27,8 @@ postgres:
   volumes_from:
     - data
   volumes:
-    - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    - ./backups/postgresql:/backup
+    - D:\Quellecode\DOCKER\PING\postgres\docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    - D:\Quellecode\DOCKER\PING\backups\postgresql:/backup
   env_file:
     - env
   expose:
@@ -44,5 +44,5 @@ data:
   restart: always
   image: alpine
   volumes:
-    - /var/lib/postgresql
+    - D:\Quellecode\DOCKER\PING\postgresql
   command: "true"
